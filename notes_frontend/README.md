@@ -1,82 +1,49 @@
-# Lightweight React Template for KAVIA
+# Notes Frontend (React)
 
-This project provides a minimal React template with a clean, modern UI and minimal dependencies.
-
-## Features
-
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
+A modern, light-themed notes management app with:
+- Sidebar navigation
+- Search
+- Notes list and details
+- Create/Edit modals
+- REST API integration for CRUD
 
 ## Getting Started
 
-In the project directory, you can run:
+- Install dependencies: `npm install`
+- Start dev server: `npm start`
+- Run tests: `npm test`
+- Build: `npm run build`
 
-### `npm start`
+## Configuration
 
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Set the backend API base URL via environment variable:
 
-### `npm test`
+- REACT_APP_API_BASE_URL=http://localhost:4000
 
-Launches the test runner in interactive watch mode.
+Create a `.env` file in this folder if needed (do not commit secrets). The app defaults to `http://localhost:4000` when not provided.
 
-### `npm run build`
+## API Contract
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The app expects a REST API with the following endpoints:
+- GET    /notes           -> returns array of notes [{ id, title, content }]
+- GET    /notes/:id       -> returns a single note
+- POST   /notes           -> accepts { title, content }, returns created note with id
+- PUT    /notes/:id       -> accepts { title, content }, returns updated note
+- DELETE /notes/:id       -> deletes a note, returns 204
 
-## Customization
+Optional: GET /notes?q=searchTerm to filter notes by search.
 
-### Colors
+## Theming
 
-The main brand colors are defined as CSS variables in `src/App.css`:
+The app supports light/dark themes with a toggle button. Brand colors used:
+- primary: #1976d2
+- secondary: #424242
+- accent: #388e3c
 
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
-```
+## Project Structure
 
-### Components
-
-This template uses pure HTML/CSS components instead of a UI framework. You can find component styles in `src/App.css`. 
-
-Common components include:
-- Buttons (`.btn`, `.btn-large`)
-- Container (`.container`)
-- Navigation (`.navbar`)
-- Typography (`.title`, `.subtitle`, `.description`)
-
-## Learn More
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- src/api/notesApi.js: Fetch helpers for CRUD
+- src/hooks/useNotes.js: State management for notes
+- src/components/*: UI components
+- src/App.js: Main application layout and logic
+- src/styles.css: Primary styling
